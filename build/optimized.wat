@@ -24,6 +24,7 @@
  (global $~lib/rt/pure/ROOTS (mut i32) (i32.const 0))
  (global $~lib/rt/pure/CUR (mut i32) (i32.const 0))
  (global $~lib/rt/pure/END (mut i32) (i32.const 0))
+ (global $assembly/exports/CONST_FOR_JAVASCRIPT i32 (i32.const 4321))
  (global $assembly/index/a (mut i32) (i32.const 0))
  (global $~lib/rt/__rtti_base i32 (i32.const 416))
  (export "memory" (memory $0))
@@ -32,6 +33,8 @@
  (export "__release" (func $~lib/rt/pure/__release))
  (export "__collect" (func $~lib/rt/pure/__collect))
  (export "__rtti_base" (global $~lib/rt/__rtti_base))
+ (export "callMeFromJavascript" (func $assembly/exports/callMeFromJavascript))
+ (export "CONST_FOR_JAVASCRIPT" (global $assembly/exports/CONST_FOR_JAVASCRIPT))
  (export "add" (func $assembly/index/add))
  (start $start)
  (func $~lib/rt/tlsf/removeBlock (; 1 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
@@ -1762,7 +1765,14 @@
    call $~lib/rt/pure/decrement
   end
  )
- (func $~lib/memory/memory.fill (; 26 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $assembly/exports/callMeFromJavascript (; 26 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+  local.get $0
+  local.get $1
+  i32.add
+  i32.const 1
+  i32.add
+ )
+ (func $~lib/memory/memory.fill (; 27 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   block $~lib/util/memory/memset|inlined.0
    local.get $1
@@ -1971,7 +1981,7 @@
    end
   end
  )
- (func $~lib/arraybuffer/ArrayBuffer#constructor (; 27 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/arraybuffer/ArrayBuffer#constructor (; 28 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   i32.const 1073741808
@@ -1993,7 +2003,7 @@
   local.get $1
   call $~lib/rt/pure/__retain
  )
- (func $~lib/map/Map<~lib/string/String,~lib/string/String>#clear (; 28 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/map/Map<~lib/string/String,~lib/string/String>#clear (; 29 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   i32.const 16
   call $~lib/arraybuffer/ArrayBuffer#constructor
@@ -2026,7 +2036,7 @@
   i32.const 0
   i32.store offset=20
  )
- (func $~lib/map/Map<~lib/string/String,~lib/string/String>#constructor (; 29 ;) (type $FUNCSIG$i) (result i32)
+ (func $~lib/map/Map<~lib/string/String,~lib/string/String>#constructor (; 30 ;) (type $FUNCSIG$i) (result i32)
   (local $0 i32)
   i32.const 24
   i32.const 3
@@ -2054,7 +2064,7 @@
   call $~lib/map/Map<~lib/string/String,~lib/string/String>#clear
   local.get $0
  )
- (func $~lib/string/String#get:length (; 30 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/string/String#get:length (; 31 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   local.get $0
   i32.const 16
   i32.sub
@@ -2062,7 +2072,7 @@
   i32.const 1
   i32.shr_u
  )
- (func $~lib/util/hash/hashStr (; 31 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/util/hash/hashStr (; 32 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -2106,7 +2116,7 @@
   call $~lib/rt/pure/__release
   local.get $2
  )
- (func $~lib/util/string/compareImpl (; 32 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/util/string/compareImpl (; 33 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2202,7 +2212,7 @@
   call $~lib/rt/pure/__release
   i32.const 0
  )
- (func $~lib/string/String.__eq (; 33 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
+ (func $~lib/string/String.__eq (; 34 ;) (type $FUNCSIG$ii) (param $0 i32) (result i32)
   (local $1 i32)
   local.get $0
   call $~lib/rt/pure/__retain
@@ -2250,7 +2260,7 @@
   call $~lib/rt/pure/__release
   i32.const 0
  )
- (func $~lib/map/Map<~lib/string/String,~lib/string/String>#find (; 34 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $~lib/map/Map<~lib/string/String,~lib/string/String>#find (; 35 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   i32.const 376
   call $~lib/rt/pure/__retain
   drop
@@ -2299,7 +2309,7 @@
   call $~lib/rt/pure/__release
   i32.const 0
  )
- (func $~lib/map/Map<~lib/string/String,~lib/string/String>#rehash (; 35 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<~lib/string/String,~lib/string/String>#rehash (; 36 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
@@ -2436,7 +2446,7 @@
   local.get $3
   call $~lib/rt/pure/__release
  )
- (func $~lib/map/Map<~lib/string/String,~lib/string/String>#set (; 36 ;) (type $FUNCSIG$vi) (param $0 i32)
+ (func $~lib/map/Map<~lib/string/String,~lib/string/String>#set (; 37 ;) (type $FUNCSIG$vi) (param $0 i32)
   (local $1 i32)
   (local $2 i32)
   (local $3 i32)
@@ -2555,18 +2565,18 @@
   i32.const 400
   call $~lib/rt/pure/__release
  )
- (func $assembly/index/add (; 37 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/index/add (; 38 ;) (type $FUNCSIG$iii) (param $0 i32) (param $1 i32) (result i32)
   local.get $0
   local.get $1
   i32.add
  )
- (func $start (; 38 ;) (type $FUNCSIG$v)
+ (func $start (; 39 ;) (type $FUNCSIG$v)
   call $~lib/map/Map<~lib/string/String,~lib/string/String>#constructor
   global.set $assembly/index/a
   global.get $assembly/index/a
   call $~lib/map/Map<~lib/string/String,~lib/string/String>#set
  )
- (func $~lib/rt/pure/__visit (; 39 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/pure/__visit (; 40 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   local.get $0
   i32.const 452
   i32.lt_u
@@ -2676,7 +2686,7 @@
    unreachable
   end
  )
- (func $~lib/map/Map<~lib/string/String,~lib/string/String>#__visit_impl (; 40 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/map/Map<~lib/string/String,~lib/string/String>#__visit_impl (; 41 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   (local $2 i32)
   (local $3 i32)
   local.get $0
@@ -2724,7 +2734,7 @@
   local.get $1
   call $~lib/rt/pure/__visit
  )
- (func $~lib/rt/__visit_members (; 41 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
+ (func $~lib/rt/__visit_members (; 42 ;) (type $FUNCSIG$vii) (param $0 i32) (param $1 i32)
   block $switch$1$default
    block $switch$1$case$5
     block $switch$1$case$4
@@ -2754,7 +2764,7 @@
   end
   unreachable
  )
- (func $null (; 42 ;) (type $FUNCSIG$v)
+ (func $null (; 43 ;) (type $FUNCSIG$v)
   nop
  )
 )
